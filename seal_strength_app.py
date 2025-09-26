@@ -9,9 +9,9 @@ st.title("🔩 Seal Strength Predictor")
 st.sidebar.title("🤖 AI Assistant")
 st.sidebar.markdown("Ask questions about the model, inputs, or interpretation of results.")
 
-@st.cache_resource
+# Load a more capable open-source LLM from HuggingFace
 def load_genai_pipeline():
-    return pipeline("text-generation", model="distilgpt2")
+    return pipeline("text2text-generation", model="google/flan-t5-base")
 
 genai = load_genai_pipeline()
 
@@ -19,7 +19,7 @@ user_query = st.sidebar.text_area("Ask me anything:", height=100)
 if st.sidebar.button("Get Help"):
     if user_query.strip():
         with st.spinner("Thinking..."):
-            response = genai(user_query, max_length=100, do_sample=True)[0]['generated_text']
+            response = genai(user_query, max_length=200)[0]['generated_text']
             st.sidebar.markdown("**AI Response:**")
             st.sidebar.write(response)
     else:
