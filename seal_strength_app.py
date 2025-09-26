@@ -11,7 +11,7 @@ st.sidebar.markdown("Ask questions about the model, inputs, or interpretation of
 
 @st.cache_resource
 def load_genai_pipeline():
-    return pipeline("text-generation", model="sshleifer/tiny-gpt2")
+    return pipeline("text-generation", model="distilgpt2")
 
 genai = load_genai_pipeline()
 
